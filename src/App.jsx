@@ -4,7 +4,6 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
 import SidebarNav from "./components/SidebarNav/SidebarNav";
 import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 import SalesContext from "./contexts/SalesContext";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";

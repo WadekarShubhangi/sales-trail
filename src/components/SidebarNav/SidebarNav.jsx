@@ -12,8 +12,11 @@ const SidebarNav = () => {
           <NavLink to="/allLeads" className="nav-link">
             Leads
           </NavLink>
-          <NavLink to="/sales" className="nav-link">
+          {/* <NavLink to="/sales" className="nav-link">
             Sales
+          </NavLink> */}
+          <NavLink to="/salesAgents" className="nav-link">
+            Sales Agents
           </NavLink>
            <NavLink to="/agents" className="nav-link">
             Agents

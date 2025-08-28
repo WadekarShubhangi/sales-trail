@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import SidebarNav from "../../components/SidebarNav/SidebarNav";
+import Header from "../../components/Header/Header";
 import SalesContext from "../../contexts/SalesContext";
 
 const EditLead = () => {
@@ -12,6 +13,7 @@ const EditLead = () => {
     leadHandleChange,
     updateLead,
     agentsData,
+    closeSideBar,
   } = useContext(SalesContext);
 
   const { leadId } = useParams();
@@ -33,9 +35,13 @@ const EditLead = () => {
 
   return (
     <>
-      <div className="container my-4">
-        <h2>Edit Address</h2>
-        <form onSubmit={handleSubmit} className="lead-form">
+      <main className="d-flex">
+        <aside className={`section-sidebar ${closeSideBar ? "open" : ""}`}>
+          <SidebarNav />
+        </aside>
+        <div className="container my-4">
+          <Header title="Edit Address" />
+          <form onSubmit={handleSubmit} className="lead-form">
             <div className="mb-3">
               <label className="form-label fw-semibold">Name:</label>
               <input
@@ -154,8 +160,8 @@ const EditLead = () => {
               Add Lead
             </button>
           </form>
-      </div>
-     
+        </div>
+      </main>
     </>
   );
 };
