@@ -1,0 +1,23 @@
+header {
+  margin-bottom: 1rem;
+}
+.heading {
+  font-size: 36px;
+}
+.sidebar-hamburger {
+  display: none;
+}
+@media (max-width: 769px) {
+  .heading { 
+    font-size: 25px;
+  }
+  .sidebar-hamburger {
+    display: inline-block;
+  }
+  .btn-sidebar {
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }
+}

@@ -1,0 +1,74 @@
+#root {
+  --dark-theme: #19232a;
+  --color-white: #ffffff;
+  --light-theme: #bbbcbd;
+}
+
+.crm-dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.leadList {
+  padding: 1rem 1rem;
+}
+
+.leadList button {
+  width: 100%;
+  max-width: 120px;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 10px;
+}
+
+.leadStatus {
+  padding: 1rem 1rem;
+}
+
+.quick-filters {
+  padding: 1rem 1rem;
+}
+.filterButtons button {
+  width: 100%;
+  max-width: 120px;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 10px;
+}
+.addLead {
+  padding: 1rem 1rem;
+}
+
+.addLead .btn-primary {
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.section-sidebar {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .leadList button {
+    width: 100%;
+    max-width: 80px;
+    padding: 8px 0;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .filterButtons button {
+    width: 100%;
+    max-width: 80px;
+    padding: 8px 0;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .section-sidebar {
+    display: none;
+  }
+  .section-sidebar.open {
+    display: block;
+  }
+}
