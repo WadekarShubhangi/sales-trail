@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { SalesProvider } from "./contexts/SalesContext.jsx";
 import AddLead from "./pages/LeadsManagement/AddLead.jsx";
-import EditLead from "./pages/EditLead/EditLead";
+import EditLead from "./pages/SalesAgentManagement/EditLead.jsx";
 import AllLeads from "./pages/LeadsManagement/AllLeads.jsx";
 import LeadDetails from "./pages/LeadDetails/LeadDetails.jsx";
 
@@ -20,13 +20,17 @@ import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
+
   { path: "/addLead", element: <AddLead /> },
+  { path: "/leads/:id/edit", element: <EditLead /> },
   { path: "/allLeads", element: <AllLeads /> },
+
   { path: "/leadDetails/:leadId", element: <LeadDetails /> },
+
   { path: "/salesAgents", element: <SalesAgents /> },
   { path: "/addAgent", element: <AddAgent /> },
+
   { path: "/reports", element: <Reports /> },
-  { path: "/leads/:id/edit", element: <EditLead />},
   { path: "/settings", element: <Settings /> },
 ]);
 
