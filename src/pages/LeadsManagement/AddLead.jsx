@@ -1,17 +1,45 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SalesContext from "../../contexts/SalesContext";
+import { useParams } from "react-router-dom";
 
 import SidebarNav from "../../components/SidebarNav/SidebarNav";
 import Header from "../../components/Header/Header";
 
 const AddLead = () => {
+  const { leadId } = useParams();
+  const [isInitialized, setIsInitialized] = useState(false);
   const {
+    leadData,
+    setLeadFormData,
+    updateLead,
     leadHandleChange,
     leadHandleSubmit,
     agentsData,
     leadFormData,
     closeSideBar,
   } = useContext(SalesContext);
+
+    useEffect(() => {
+    console.log("called edit lead successfully");
+    if(leadId){
+      if (!isInitialized) {
+        const selected = leadData?.leads?.find((lead) => lead._id === leadId);
+        console.log("lead",leadData,"leadId",leadId);
+        if (selected) {
+          setLeadFormData(selected);
+          setIsInitialized(true);
+        }
+      }
+    }
+    else{
+      setLeadFormData({});
+    }
+  }, [leadId, leadData, isInitialized]);
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    updateLead(leadId, leadFormData);
+  };
   return (
     <>
       <main className="d-flex crm-dashboard">
@@ -19,8 +47,8 @@ const AddLead = () => {
           <SidebarNav />
         </aside>
         <div className="container my-3">
-          <Header title="Add New Lead" />
-          <form onSubmit={leadHandleSubmit} className="lead-form">
+          <Header title={leadId ?"Edit Lead":"Add New Lead"} />
+          <form onSubmit={leadId ? handleSubmit : leadHandleSubmit} className="lead-form">
             <div className="mb-3">
               <label className="form-label fw-semibold">Name:</label>
               <input

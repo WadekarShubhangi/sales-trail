@@ -25,6 +25,10 @@ export function SalesProvider({ children }) {
     commentText: "",
     createdAt: "",
   });
+  const [agentFormData, setAgentFormData] = useState({
+    name: "",
+    email: "",
+  });
 
   const {
     data: leadData,
@@ -166,8 +170,30 @@ export function SalesProvider({ children }) {
       .catch((err) => console.error("Error updating Lead:", err));
   };
 
+  const agentHandleChange = (e) => {
+    const { name, value } = e.target;
+    setAgentFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
+  const agentHandleSubmit = (e) => {
+    e.preventDefault();
 
+    fetch("https://sales-trail.vercel.app/agents", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(agentFormData),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        toast.success("Agent added successfully!");
+        agentsRefetch(); 
+        setAgentFormData({ name: "", email: "" });
+      })
+      .catch((err) => console.error("Error adding agent:", err));
+  };
 
   return (
     <SalesContext.Provider
@@ -206,6 +232,10 @@ export function SalesProvider({ children }) {
 
         updateLead,
 
+        agentFormData,
+        setAgentFormData,
+        agentHandleChange,
+        agentHandleSubmit,
       }}
     >
       {children}

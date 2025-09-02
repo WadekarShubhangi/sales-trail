@@ -10,7 +10,7 @@ const Header = ({ title }) => {
         {title}{" "}
         <span className="sidebar-hamburger">
           <button
-            className="btn btn-light btn-sidebar"
+            className={`btn btn-light btn-sidebar ${closeSideBar ? "open" : ""}`}
             onClick={() => setCloseSideBar(!closeSideBar)}
           >
             {closeSideBar ? (

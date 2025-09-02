@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { SalesProvider } from "./contexts/SalesContext.jsx";
 import AddLead from "./pages/LeadsManagement/AddLead.jsx";
-import EditLead from "./pages/SalesAgentManagement/EditLead.jsx";
+import EditLead from "./pages/LeadsManagement/EditLead.jsx";
 import AllLeads from "./pages/LeadsManagement/AllLeads.jsx";
 import LeadDetails from "./pages/LeadDetails/LeadDetails.jsx";
 
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   { path: "/", element: <App /> },
 
   { path: "/addLead", element: <AddLead /> },
-  { path: "/leads/:id/edit", element: <EditLead /> },
+  { path: "/leads/:leadId/edit", element: <EditLead /> },
   { path: "/allLeads", element: <AllLeads /> },
 
   { path: "/leadDetails/:leadId", element: <LeadDetails /> },

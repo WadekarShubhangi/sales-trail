@@ -7,6 +7,7 @@ import useFetch from "../../useFetch";
 
 const LeadDetails = () => {
   const { leadId } = useParams();
+  console.log(leadId)
 
   const {
     leadData,

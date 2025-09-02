@@ -20,4 +20,24 @@ header {
     right: 15px;
     top: 15px;
   }
+  .btn-sidebar.open {
+      position: absolute;
+      left: 0;
+      width: 40px;
+      background: transparent;
+      color: white;
+      border: none;
+      top: -10px;
+  }
+  .btn.btn-sidebar:focus-visible {
+      box-shadow: none;
+  }
+  .btn.btn-sidebar:active {
+    color: white;
+    background-color:transparent ;
+  }
+  .btn-sidebar.open i {
+    font-size: 30px;
+  }
 }
+
