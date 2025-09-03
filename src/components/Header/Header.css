@@ -21,13 +21,14 @@ header {
     top: 15px;
   }
   .btn-sidebar.open {
-      position: absolute;
+      position: fixed;
       left: 0;
       width: 40px;
       background: transparent;
       color: white;
       border: none;
       top: -10px;
+      z-index: 999;
   }
   .btn.btn-sidebar:focus-visible {
       box-shadow: none;

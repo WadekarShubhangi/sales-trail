@@ -144,12 +144,12 @@ export function SalesProvider({ children }) {
 
   const updateLead = (leadId, updatedData) => {
     fetch(`https://sales-trail.vercel.app/leads/${leadId}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...updatedData,
         tags: updatedData.tags
-          ? updatedData.tags.split(",").map((tag) => tag.trim())
+          ? updatedData.tags
           : [],
       }),
     })

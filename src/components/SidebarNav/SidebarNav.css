@@ -55,7 +55,7 @@
 @media (max-width: 768px) {
   .sidebar {
     width: auto;
-    position: absolute;
+    position: fixed;
     opacity: 0.8;
     z-index: 999;
   }

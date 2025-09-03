@@ -21,20 +21,22 @@ const AddLead = () => {
 
     useEffect(() => {
     console.log("called edit lead successfully");
-    if(leadId){
-      if (!isInitialized) {
+    if(!isInitialized){
+      if (leadId) {
         const selected = leadData?.leads?.find((lead) => lead._id === leadId);
         console.log("lead",leadData,"leadId",leadId);
         if (selected) {
           setLeadFormData(selected);
           setIsInitialized(true);
+          
         }
       }
+      else{
+        setLeadFormData({});
+        setIsInitialized(true);
+      }
     }
-    else{
-      setLeadFormData({});
-    }
-  }, [leadId, leadData, isInitialized]);
+  }, [leadId, leadData, isInitialized, leadFormData]);
 
     const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,6 +44,7 @@ const AddLead = () => {
   };
   return (
     <>
+    {isInitialized ?
       <main className="d-flex crm-dashboard">
         <aside className={`section-sidebar ${closeSideBar ? "open" : ""}`}>
           <SidebarNav />
@@ -89,7 +92,7 @@ const AddLead = () => {
                 name="salesAgent"
                 className="form-select"
                 required
-                value={leadFormData.salesAgent}
+                value={leadId ? leadFormData.salesAgent._id : leadFormData.salesAgent}
                 onChange={leadHandleChange}
               >
                 <option value="">Select Agent</option>
@@ -168,7 +171,10 @@ const AddLead = () => {
             </button>
           </form>
         </div>
-      </main>
+      </main> : 
+      <main>
+        <p>Loading...</p>
+      </main>}
     </>
   );
 };
