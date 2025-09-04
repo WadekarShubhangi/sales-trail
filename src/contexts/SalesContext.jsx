@@ -10,6 +10,8 @@ export function SalesProvider({ children }) {
   const [activeStatus, setActiveStatus] = useState("All");
   const [activeAgent, setActiveAgent] = useState("All");
   const [sortByTime, setSortByTime] = useState("All");
+  const [activePriority, setActivePriority] = useState("All");
+
   const [leadFormData, setLeadFormData] = useState({
     name: "",
     source: "",
@@ -48,7 +50,9 @@ export function SalesProvider({ children }) {
     const statusMatch = activeStatus === "All" || lead.status === activeStatus;
     const agentMatch =
       activeAgent === "All" || lead.salesAgent.name === activeAgent;
-    return statusMatch && agentMatch;
+    const priorityMatch =
+      activePriority === "All" || lead.priority === activePriority;
+    return statusMatch && agentMatch && priorityMatch;
   });
 
   if (sortByTime === "Low to High") {
@@ -105,6 +109,7 @@ export function SalesProvider({ children }) {
     setActiveStatus("All");
     setActiveAgent("All");
     setSortByTime("All");
+    setActivePriority("All");
   }, []);
 
   const handleCommentChange = (e) => {
@@ -148,9 +153,7 @@ export function SalesProvider({ children }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...updatedData,
-        tags: updatedData.tags
-          ? updatedData.tags
-          : [],
+        tags: updatedData.tags ? updatedData.tags : [],
       }),
     })
       .then((res) => res.json())
@@ -189,7 +192,7 @@ export function SalesProvider({ children }) {
       .then((res) => res.json())
       .then(() => {
         toast.success("Agent added successfully!");
-        agentsRefetch(); 
+        agentsRefetch();
         setAgentFormData({ name: "", email: "" });
       })
       .catch((err) => console.error("Error adding agent:", err));
@@ -236,6 +239,9 @@ export function SalesProvider({ children }) {
         setAgentFormData,
         agentHandleChange,
         agentHandleSubmit,
+
+        activePriority,
+        setActivePriority,
       }}
     >
       {children}

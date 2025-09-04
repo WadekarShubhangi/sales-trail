@@ -15,7 +15,10 @@ const LeadStatusView = () => {
     setSortByTime,
     setActiveAgent,
     resetFilters,
+    setActivePriority,
+    activePriority
   } = useContext(SalesContext);
+
   useEffect(() => {
     resetFilters();
   }, [resetFilters]);
@@ -27,62 +30,60 @@ const LeadStatusView = () => {
         </aside>
         <div className="container my-3">
           <Header title="Lead Status View" />
-          <div className="my-3">
-            <label className="fw-semibold my-2">Filter by Status:</label> <br />
-            <select
-              className="form-select w-100"
-              onChange={(e) => setActiveStatus(e.target.value)}
-            >
-              <option className="bg-dark text-light" value="All">
-                All
-              </option>
-              <option className="bg-dark text-light" value="New">
-                New
-              </option>
-              <option className="bg-dark text-light" value="Contacted">
-                Contacted
-              </option>
-              <option className="bg-dark text-light" value="Qualified">
-                Qualified
-              </option>
-              <option className="bg-dark text-light" value="Proposal Sent">
-                Proposal Sent
-              </option>
-              <option className="bg-dark text-light" value="Closed">
-                Closed
-              </option>
-            </select>
+          <div className="row my-3">
+            <div className="col-md-6 col-sm-6 col-12">
+              <label className="fw-semibold mb-2">Filter by Status:</label>{" "}
+              <br />
+              <select
+                className="form-select w-100"
+                onChange={(e) => setActiveStatus(e.target.value)}
+              >
+                <option className="bg-dark text-light" value="All">
+                  All
+                </option>
+                <option className="bg-dark text-light" value="New">
+                  New
+                </option>
+                <option className="bg-dark text-light" value="Contacted">
+                  Contacted
+                </option>
+                <option className="bg-dark text-light" value="Qualified">
+                  Qualified
+                </option>
+                <option className="bg-dark text-light" value="Proposal Sent">
+                  Proposal Sent
+                </option>
+                <option className="bg-dark text-light" value="Closed">
+                  Closed
+                </option>
+              </select>
+            </div>
+            <div className="col-md-6 col-sm-6 col-12">
+               <label className="fw-semibold mb-2">Filter by Priority:</label>{" "}
+              <br />
+              <select
+                className="form-select w-100"
+                onChange={(e) => setActivePriority(e.target.value)}
+              >
+                <option className="bg-dark text-light" value="All">
+                  All
+                </option>
+                <option className="bg-dark text-light" value="High">
+                  High
+                </option>
+                <option className="bg-dark text-light" value="Medium">
+                  Medium
+                </option>
+                <option className="bg-dark text-light" value="Low">
+                  Low
+                </option>
+              </select>
+            </div>
           </div>
-
-          {leadLoading && <p>Loading...</p>}
-          <ul className="list-group">
-            <li className="list-group-item">
-              <div className="row">
-                <div className="col-sm-3 col-2 fw-semibold">Lead No.</div>
-                <div className="col-sm-3 col-4 fw-semibold">Lead Name</div>
-                <div className="col-sm-3 col-4 fw-semibold">Lead Agent</div>
-                <div className="col-sm-3 col-2 fw-semibold">Time to close</div>
-              </div>
-            </li>
-            {!leadLoading &&
-              filteredData.length > 0 &&
-              filteredData.map((lead, index) => (
-                <li key={lead._id} className="list-group-item">
-                  <div className="row">
-                    <div className="col-sm-3 col-2">Lead {index + 1}</div>
-                    <div className="col-sm-3 col-4">{lead.name}</div>
-                    <div className="col-sm-3 col-4">{lead.salesAgent.name}</div>
-                    <div className="col-sm-3 col-2">{lead.timeToClose}</div>
-                  </div>
-            
-                </li>
-              ))}
-          </ul>
-          {!leadLoading && leadError && <p>No Leads Found.</p>}
 
           <div className="row my-3">
             <div className="col-md-6 col-sm-6 col-12">
-              <label className="fw-semibold my-2">
+              <label className="fw-semibold mb-2">
                 Filter by Sales Agents:
               </label>{" "}
               <br />
@@ -106,7 +107,7 @@ const LeadStatusView = () => {
               </select>
             </div>
             <div className="col-md-6 col-sm-6 col-12">
-              <label className="fw-semibold my-2">Sort by Time to Close:</label>{" "}
+              <label className="fw-semibold mb-2">Sort by Time to Close:</label>{" "}
               <br />
               <select
                 className="form-select"
@@ -124,6 +125,30 @@ const LeadStatusView = () => {
               </select>
             </div>
           </div>
+          {leadLoading && <p>Loading...</p>}
+          <ul className="list-group">
+            <li className="list-group-item">
+              <div className="row">
+                <div className="col-sm-3 col-2 fw-semibold">Lead No.</div>
+                <div className="col-sm-3 col-4 fw-semibold">Lead Name</div>
+                <div className="col-sm-3 col-4 fw-semibold">Lead Agent</div>
+                <div className="col-sm-3 col-2 fw-semibold">Time to close</div>
+              </div>
+            </li>
+            {!leadLoading &&
+              filteredData.length > 0 &&
+              filteredData.map((lead, index) => (
+                <li key={lead._id} className="list-group-item">
+                  <div className="row">
+                    <div className="col-sm-3 col-2">Lead {index + 1}</div>
+                    <div className="col-sm-3 col-4">{lead.name}</div>
+                    <div className="col-sm-3 col-4">{lead.salesAgent.name}</div>
+                    <div className="col-sm-3 col-2">{lead.timeToClose}</div>
+                  </div>
+                </li>
+              ))}
+          </ul>
+          {!leadLoading && leadError && <p>No Leads Found.</p>}
         </div>
       </main>
     </>
