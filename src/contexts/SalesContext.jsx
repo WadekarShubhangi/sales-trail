@@ -18,7 +18,7 @@ export function SalesProvider({ children }) {
     status: "New",
     tags: "",
     timeToClose: "",
-    priority: "Medium",
+    priority: "",
   });
   const [commentFormData, setCommentFormData] = useState({
     lead: "",
@@ -112,7 +112,6 @@ export function SalesProvider({ children }) {
     .then(() => {
       toast.success("Lead deleted successfully.");
       leadRefetch();
-      //  navigate("/allLeads"); 
     })
     .catch((err) => console.error("Error in delete lead API:", err));
 }

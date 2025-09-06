@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import SalesContext from "../../contexts/SalesContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import SidebarNav from "../../components/SidebarNav/SidebarNav";
 import Header from "../../components/Header/Header";
 
 const AddLead = () => {
   const { leadId } = useParams();
+  const navigate = useNavigate();
   const [isInitialized, setIsInitialized] = useState(false);
   const {
     leadData,
@@ -166,9 +167,11 @@ const AddLead = () => {
               </select>
             </div>
 
-            <button type="submit" className="btn btn-primary">
-              Add Lead
+            <button type="submit" className="btn btn-primary" onClick={()=> navigate("/allLeads")}>
+              {leadId ? "Save Lead" : "Add Lead"}
             </button>
+
+            
           </form>
         </div>
       </main> : 
