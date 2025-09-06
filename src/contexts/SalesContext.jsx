@@ -1,7 +1,6 @@
 import useFetch from "../useFetch";
-import { createContext, useState, useCallback } from "react";
+import { createContext, useState, useCallback, useEffect } from "react";
 import { toast } from "react-toastify";
-
 const SalesContext = createContext();
 export default SalesContext;
 
@@ -11,7 +10,9 @@ export function SalesProvider({ children }) {
   const [activeAgent, setActiveAgent] = useState("All");
   const [sortByTime, setSortByTime] = useState("All");
   const [activePriority, setActivePriority] = useState("All");
-
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const [isInitialized, setIsInitialized] = useState(false);
+  // const [parameters, setParameters] = useState({});
   const [leadFormData, setLeadFormData] = useState({
     name: "",
     source: "",

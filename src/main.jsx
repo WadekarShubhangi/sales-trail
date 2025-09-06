@@ -41,7 +41,8 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <SalesProvider>
       <RouterProvider router={router} />
-      <ToastContainer position="top-center" autoClose={1000} />
+      <ToastContainer position="top-center" autoClose={500} />
     </SalesProvider>
   </StrictMode>
+  
 );

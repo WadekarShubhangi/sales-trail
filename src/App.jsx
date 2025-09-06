@@ -5,7 +5,7 @@ import "./App.css";
 import SidebarNav from "./components/SidebarNav/SidebarNav";
 import Header from "./components/Header/Header";
 import SalesContext from "./contexts/SalesContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 function App() {
@@ -44,14 +44,18 @@ function App() {
             <h3>Leads</h3>
             {leadLoading && <p>Loading...</p>}
             {/* no. of leads */}
-            {!leadLoading &&
-              filteredData.length > 0 &&
-              filteredData.map((lead, index) => (
-                <button key={lead._id} className="btn btn-secondary">
-                  Lead {index + 1}
-                </button>
-              ))}
-
+            <div className="row">
+              {!leadLoading &&
+                filteredData.length > 0 &&
+                filteredData.map((lead, index) => (
+                  <div
+                    key={lead._id}
+                    className="col-md-3 col-sm-4 col-6 border p-2"
+                  >
+                    {index + 1}. {lead.name}
+                  </div>
+                ))}
+            </div>
             {!leadLoading || (leadError && <p>No Leads Found.</p>)}
           </div>
           {/* leads status */}
@@ -70,8 +74,8 @@ function App() {
           <div className="quick-filters">
             <h3>Quick Filters</h3>
             <div className="filterButtons">
-              {statusFilters.map((item) => (
-                <button
+              {statusFilters.map((item, index) => (
+                <button key={index + 1}
                   className="btn btn-dark"
                   onClick={() => setActiveStatus(item)}
                 >
@@ -92,11 +96,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-

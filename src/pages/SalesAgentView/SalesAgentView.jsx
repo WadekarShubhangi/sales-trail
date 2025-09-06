@@ -4,19 +4,19 @@ import SidebarNav from "../../components/SidebarNav/SidebarNav";
 import Header from "../../components/Header/Header";
 
 const SalesAgentView = () => {
- const {
-  closeSideBar,
-  resetFilters,
-  agentsData,
-  agentsLoading,
-  leadLoading,
-  leadError,
-  filteredData,
-  setActiveAgent,
-  setActivePriority,
-  setActiveStatus,
-  setSortByTime,
-} = useContext(SalesContext);
+  const {
+    closeSideBar,
+    resetFilters,
+    agentsData,
+    agentsLoading,
+    leadLoading,
+    leadError,
+    filteredData,
+    setActiveAgent,
+    setActivePriority,
+    setActiveStatus,
+    setSortByTime,
+  } = useContext(SalesContext);
 
   useEffect(() => {
     resetFilters();
@@ -56,33 +56,31 @@ const SalesAgentView = () => {
               </select>
             </div>
             <div className="col-md-6 colo-sm-6 col-12">
-           
-                <label className="fw-semibold mb-2">Filter by Priority:</label>{" "}
-                <br />
-                <select
-                  className="form-select w-100"
-                  onChange={(e) => setActivePriority(e.target.value)}
-                >
-                  <option className="bg-dark text-light" value="All">
-                    All
-                  </option>
-                  <option className="bg-dark text-light" value="High">
-                    High
-                  </option>
-                  <option className="bg-dark text-light" value="Medium">
-                    Medium
-                  </option>
-                  <option className="bg-dark text-light" value="Low">
-                    Low
-                  </option>
-                </select>
-           
+              <label className="fw-semibold mb-2">Filter by Priority:</label>{" "}
+              <br />
+              <select
+                className="form-select w-100"
+                onChange={(e) => setActivePriority(e.target.value)}
+              >
+                <option className="bg-dark text-light" value="All">
+                  All
+                </option>
+                <option className="bg-dark text-light" value="High">
+                  High
+                </option>
+                <option className="bg-dark text-light" value="Medium">
+                  Medium
+                </option>
+                <option className="bg-dark text-light" value="Low">
+                  Low
+                </option>
+              </select>
             </div>
           </div>
 
-           <div className="row my-3">
+          <div className="row my-3">
             <div className="col-md-6 col-sm-6 col-12">
-             <label className="fw-semibold mb-2">Filter by Status:</label>{" "}
+              <label className="fw-semibold mb-2">Filter by Status:</label>{" "}
               <br />
               <select
                 className="form-select w-100"
@@ -143,9 +141,22 @@ const SalesAgentView = () => {
               filteredData.map((lead, index) => (
                 <li key={lead._id} className="list-group-item">
                   <div className="row">
-                    <div className="col-sm-4 col-2">Lead {index + 1}</div>
+                    <div className="col-sm-4 col-2">Lead {index + 1} </div>
                     <div className="col-sm-4 col-5">{lead.name}</div>
-                    <div className="col-sm-4 col-5">{lead.status}</div>
+                    <div className="col-sm-4 col-5 position-relative">
+                      {lead.status}
+                      <span
+                        className={`position-absolute top-50 start-50 translate-middle badge rounded-pill ${
+                          lead.priority === "High"
+                            ? "bg-danger"
+                            : lead.priority === "Medium"
+                            ? "bg-warning text-dark"
+                            : "bg-success"
+                        }`}
+                      >
+                        {lead.priority?.[0]}
+                      </span>
+                    </div>
                   </div>
                 </li>
               ))}
