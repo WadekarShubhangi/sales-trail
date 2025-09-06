@@ -21,26 +21,27 @@ const Reports = () => {
     return <p className="text-center mt-3">Loading reports...</p>;
   }
 
-  const closedLeads = reportLastWeekData?.leads?.length || 0;
-  const pipelineLeads = reportPipelineData?.totalLeadsInPipeline || 0;
+// Closed & pipeline
+const closedLeads = reportLastWeekData?.leads?.length || 0;
+const pipelineLeads = reportPipelineData?.leads?.length || 0;
 
-  const agentLeadsArray = reportAgentData?.leads || [];
-  const agentCountsObj = {};
-  agentLeadsArray.forEach(lead => {
-    const agentName = lead.salesAgent?.name || "Unknown";
-    agentCountsObj[agentName] = (agentCountsObj[agentName] || 0) + 1;
-  });
-  const agentLabels = Object.keys(agentCountsObj);
-  const agentCounts = Object.values(agentCountsObj);
+// Closed by agent
+const agentLeadsArray = reportAgentData || [];
+const agentLabels = agentLeadsArray.map(item => item._id || "Unknown");
+const agentCounts = agentLeadsArray.map(item => item.closedLeads || 0);
 
-  const allLeads = [...(reportLastWeekData?.leads || []), ...(reportPipelineData?.leads || [])];
-  const statusCountsObj = {};
-  allLeads.forEach(lead => {
-    const status = lead.status || "Unknown";
-    statusCountsObj[status] = (statusCountsObj[status] || 0) + 1;
-  });
-  const statusLabels = Object.keys(statusCountsObj);
-  const statusCounts = Object.values(statusCountsObj);
+// Status distribution
+const allLeads = [
+  ...(reportLastWeekData?.leads || []),
+  ...(reportPipelineData?.leads || [])
+];
+const statusCountsObj = {};
+allLeads.forEach(lead => {
+  const status = lead.status || "Unknown";
+  statusCountsObj[status] = (statusCountsObj[status] || 0) + 1;
+});
+const statusLabels = Object.keys(statusCountsObj);
+const statusCounts = Object.values(statusCountsObj);
 
   return (
     <main className="d-flex crm-dashboard">
