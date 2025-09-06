@@ -45,6 +45,27 @@ export function SalesProvider({ children }) {
     refetch: agentsRefetch,
   } = useFetch("https://sales-trail.vercel.app/agents");
 
+    const {
+    data: reportLastWeekData,
+    loading: reportLastWeekLoading,
+    error: reportLastWeekError,
+    refetch: reportLastWeekRefetch,
+  } = useFetch("https://sales-trail.vercel.app/report/last-week");
+
+   const {
+    data: reportPipelineData,
+    loading: reportPipelineLoading,
+    error: reportPipelineError,
+    refetch: reportPipelineRefetch,
+  } = useFetch("https://sales-trail.vercel.app/report/pipeline");
+
+   const {
+    data: reportAgentData,
+    loading: reportAgentLoading,
+    error: reportAgentError,
+    refetch: reportRefetch,
+  } = useFetch("https://sales-trail.vercel.app/report/closed-by-agent");
+
   let filteredData = leadData?.leads?.filter((lead) => {
     const statusMatch = activeStatus === "All" || lead.status === activeStatus;
     const agentMatch =
@@ -255,7 +276,12 @@ export function SalesProvider({ children }) {
         agentHandleSubmit,
 
         activePriority,
-        setActivePriority,
+        setActivePriority,     reportLastWeekData,
+    reportPipelineData,
+    reportAgentData,
+    reportLastWeekLoading,
+    reportPipelineLoading,
+    reportAgentLoading,
       }}
     >
       {children}
