@@ -112,10 +112,11 @@ export function SalesProvider({ children }) {
     .then(() => {
       toast.success("Lead deleted successfully.");
       leadRefetch();
-       navigate("/allLeads"); 
+      //  navigate("/allLeads"); 
     })
     .catch((err) => console.error("Error in delete lead API:", err));
 }
+
 
 
   const resetFilters = useCallback(() => {

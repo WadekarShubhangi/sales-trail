@@ -16,7 +16,7 @@ const LeadStatusView = () => {
     setActiveAgent,
     resetFilters,
     setActivePriority,
-    activePriority
+
   } = useContext(SalesContext);
 
   useEffect(() => {

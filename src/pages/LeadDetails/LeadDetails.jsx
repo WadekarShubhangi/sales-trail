@@ -60,7 +60,7 @@ const LeadDetails = () => {
               </Link>
               <button
                 className="btn btn-danger ms-2"
-                onClick={() => deleteLead(selectedLead._id, navigate)}
+               onClick={() => {deleteLead(selectedLead._id, navigate); navigate("/allLeads"); }}
               >
                 Delete Lead
               </button>
