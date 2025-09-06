@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import SalesContext from "../../contexts/SalesContext";
 import SidebarNav from "../../components/SidebarNav/SidebarNav";
@@ -7,15 +7,15 @@ import useFetch from "../../useFetch";
 
 const LeadDetails = () => {
   const { leadId } = useParams();
-  // console.log(leadId)
-
   const {
     leadData,
     closeSideBar,
     handleCommentSubmit,
     commentFormData,
     handleCommentChange,
+    deleteLead,
   } = useContext(SalesContext);
+  const navigate = useNavigate();
   const selectedLead = leadData?.leads?.find((lead) => lead._id === leadId);
 
   const {
@@ -52,9 +52,18 @@ const LeadDetails = () => {
               <p className="card-text">
                 <strong> Time to close:</strong> {selectedLead.timeToClose}
               </p>
+              <p className="card-text">
+                <strong> Tags:</strong> {selectedLead.tags}
+              </p>
               <Link className="btn btn-primary" to={`/leads/${leadId}/edit`}>
                 Edit Lead
               </Link>
+              <button
+                className="btn btn-danger ms-2"
+                onClick={() => deleteLead(selectedLead._id, navigate)}
+              >
+                Delete Lead
+              </button>
             </div>
           </div>
 

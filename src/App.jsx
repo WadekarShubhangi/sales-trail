@@ -15,16 +15,10 @@ function App() {
     leadError,
     closeSideBar,
     filteredData,
-    setActiveStatus,
+    setActiveStatus,activeStatus
   } = useContext(SalesContext);
-  const statusFilters = [
-    "All",
-    "New",
-    "Contacted",
-    "Qualified",
-    "Proposal Sent",
-    "Closed",
-  ];
+
+
 
   const statusCounts = leadData?.leads?.reduce((acc, lead) => {
     acc[lead.status] = (acc[lead.status] || 0) + 1;
@@ -71,7 +65,7 @@ function App() {
               ))}
           </div>
 
-          <div className="quick-filters">
+          {/* <div className="quick-filters">
             <h3>Quick Filters</h3>
             <div className="filterButtons">
               {statusFilters.map((item, index) => (
@@ -83,7 +77,63 @@ function App() {
                 </button>
               ))}
             </div>
-          </div>
+          </div> */}
+
+          <div className="quick-filters my-4">
+  <h3>Quick Filters</h3>
+
+  <ul className="nav nav-pills flex-wrap gap-2">
+    <li className="nav-item">
+      <button
+        className={`nav-link ${activeStatus === "All" ? "active" : ""}`}
+        onClick={() => setActiveStatus("All")}
+      >
+        All
+      </button>
+    </li>
+    <li className="nav-item">
+      <button
+        className={`nav-link ${activeStatus === "New" ? "active" : ""}`}
+        onClick={() => setActiveStatus("New")}
+      >
+        New
+      </button>
+    </li>
+    <li className="nav-item">
+      <button
+        className={`nav-link ${activeStatus === "Contacted" ? "active" : ""}`}
+        onClick={() => setActiveStatus("Contacted")}
+      >
+        Contacted
+      </button>
+    </li>
+    <li className="nav-item">
+      <button
+        className={`nav-link ${activeStatus === "Qualified" ? "active" : ""}`}
+        onClick={() => setActiveStatus("Qualified")}
+      >
+        Qualified
+      </button>
+    </li>
+    <li className="nav-item">
+      <button
+        className={`nav-link ${activeStatus === "Proposal Sent" ? "active" : ""}`}
+        onClick={() => setActiveStatus("Proposal Sent")}
+      >
+        Proposal Sent
+      </button>
+    </li>
+    <li className="nav-item">
+      <button
+        className={`nav-link ${activeStatus === "Closed" ? "active" : ""}`}
+        onClick={() => setActiveStatus("Closed")}
+      >
+        Closed
+      </button>
+    </li>
+  </ul>
+</div>
+
           <div className="addLead">
             <Link className="btn btn-primary" to="/addLead">
               Add New Lead

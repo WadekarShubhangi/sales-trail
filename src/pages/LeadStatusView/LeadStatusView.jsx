@@ -129,10 +129,11 @@ const LeadStatusView = () => {
           <ul className="list-group">
             <li className="list-group-item">
               <div className="row">
-                <div className="col-sm-3 col-2 fw-semibold">Lead No.</div>
+              
                 <div className="col-sm-3 col-4 fw-semibold">Lead Name</div>
                 <div className="col-sm-3 col-4 fw-semibold">Lead Agent</div>
                 <div className="col-sm-3 col-2 fw-semibold">Time to close</div>
+                  <div className="col-sm-3 col-2 fw-semibold">Lead Status</div>
               </div>
             </li>
             {!leadLoading &&
@@ -140,10 +141,10 @@ const LeadStatusView = () => {
               filteredData.map((lead, index) => (
                 <li key={lead._id} className="list-group-item">
                   <div className="row">
-                    <div className="col-sm-3 col-2">Lead {index + 1}</div>
-                    <div className="col-sm-3 col-4">{lead.name}</div>
+                    <div className="col-sm-3 col-4">{index + 1}. {lead.name}</div>
                     <div className="col-sm-3 col-4">{lead.salesAgent.name}</div>
                     <div className="col-sm-3 col-2">{lead.timeToClose}</div>
+                     <div className="col-sm-3 col-2">{lead.status}</div>
                   </div>
                 </li>
               ))}

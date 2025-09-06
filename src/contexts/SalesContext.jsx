@@ -10,9 +10,7 @@ export function SalesProvider({ children }) {
   const [activeAgent, setActiveAgent] = useState("All");
   const [sortByTime, setSortByTime] = useState("All");
   const [activePriority, setActivePriority] = useState("All");
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const [isInitialized, setIsInitialized] = useState(false);
-  // const [parameters, setParameters] = useState({});
+
   const [leadFormData, setLeadFormData] = useState({
     name: "",
     source: "",
@@ -84,7 +82,7 @@ export function SalesProvider({ children }) {
       },
       body: JSON.stringify({
         ...leadFormData,
-        tags: leadFormData.tags.split(",").map((tag) => tag.trim()),
+        tags: leadFormData.tags,
       }),
     })
       .then((res) => res.json())
@@ -105,6 +103,20 @@ export function SalesProvider({ children }) {
         console.error("Error adding Leads:", err);
       });
   };
+
+  function deleteLead(leadId) {
+  fetch(`https://sales-trail.vercel.app/leads/${leadId}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then(() => {
+      toast.success("Lead deleted successfully.");
+      leadRefetch();
+       navigate("/allLeads"); 
+    })
+    .catch((err) => console.error("Error in delete lead API:", err));
+}
+
 
   const resetFilters = useCallback(() => {
     setActiveStatus("All");
@@ -224,6 +236,7 @@ export function SalesProvider({ children }) {
 
         leadHandleChange,
         leadHandleSubmit,
+        deleteLead,
 
         handleCommentChange,
         handleCommentSubmit,
